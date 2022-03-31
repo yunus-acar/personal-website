@@ -54,6 +54,7 @@ export interface PinnedRepo {
 	forks: string;
 }
 
+
 /**
  * SWR wrapper that returns github repositories for a user
  * @param username The github username to fetch pinned repos for
@@ -67,7 +68,7 @@ export function useGitHubPinnedRepos(username: string) {
 	return {
 		...resp,
 		data: resp.data?.map(item => {
-			const data: PinnedRepo & {url: string} = {
+			const data: PinnedRepo & { url: string } = {
 				...item,
 				url: `https://github.com/${item.owner}/${item.repo}`,
 			};

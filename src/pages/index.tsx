@@ -46,6 +46,8 @@ dayjs.extend(relativeTime);
 
 interface Props {
   pinnedRepos: PinnedRepo[];
+  ghOrg: GithubOrganization[];
+  orgDetail: GithubOrganization[];
   lanyard: LanyardData;
 }
 
@@ -56,6 +58,7 @@ export default function Index(props: Props) {
   const { data: lanyard } = useLanyard(DISCORD_ID, {
     fallbackData: props.lanyard,
   });
+  console.log("🌵💜🐢", props.orgDetail);
 
   // console.log("🌵💜🐢", lanyard);
 
@@ -144,6 +147,43 @@ export default function Index(props: Props) {
           <ListItem icon={SiWebstorm} text="WebStorm" />
           <ListItem icon={SiVisualstudiocode} text="VSCode" />
           <ListItem icon={SiGit} text="Git" />
+        </ul>
+      </div>
+      <div className="space-y-4">
+        <p className="text-2xl font-bold sm:text-3xl">Organizations</p>
+        <ul className="grid grid-cols-2 auto-cols-max gap-1 sm:grid-cols-2 sm:gap-3">
+          {props.orgDetail.map((org: GithubOrganization) => (
+            <li className="flex items-start" key={org.login}>
+              <a
+                href={org.url}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={org.login}
+              >
+                <img
+                  src={org.avatar_url}
+                  alt={org.login}
+                  className="w-12 h-12 rounded-md"
+                />
+              </a>
+              <span>
+                <a
+                  href={org.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={org.login}
+                >
+                  <p className="text-base mx-4 font-bold">{org.name}</p>
+                </a>
+                <a
+                  href={`mailto:${org.email}`}
+                  className="text-sm  no-underline mx-4 "
+                >
+                  {org.email}
+                </a>
+              </span>
+            </li>
+          ))}
         </ul>
       </div>
     </>
@@ -253,11 +293,30 @@ function ProjectCard({ repo: project }: { repo: PinnedRepo }) {
     </motion.div>
   );
 }
-
+export interface GithubOrganization {
+  login: string;
+  id: string;
+  url: string;
+  avatar_url: string;
+  description: string;
+  name: string;
+  blog: string;
+  email: string;
+}
 export const getStaticProps: GetStaticProps<Props> = async function () {
   const pinnedRepos = await fetch(
     "https://gh-pinned-repos.egoist.sh/?username=yunus-acar"
   ).then(async (response) => response.json() as Promise<PinnedRepo[]>);
+  const githubOrganizations = await fetch(
+    "https://api.github.com/users/yunus-acar/orgs"
+  ).then(async (response) => response.json() as Promise<GithubOrganization[]>);
+  let orgDetail = [];
+  for (const org of githubOrganizations) {
+    const orgDetailResponse = await fetch(org.url).then(
+      async (response) => response.json() as Promise<GithubOrganization>
+    );
+    orgDetail.push(orgDetailResponse);
+  }
 
   const lanyard = await fetch(
     `https://api.lanyard.rest/v1/users/${DISCORD_ID}`
@@ -270,7 +329,12 @@ export const getStaticProps: GetStaticProps<Props> = async function () {
   }
 
   return {
-    props: { pinnedRepos, lanyard: lanyardBody.data },
+    props: {
+      pinnedRepos,
+      lanyard: lanyardBody.data,
+      ghOrg: githubOrganizations,
+      orgDetail,
+    },
     revalidate: 120,
   };
 };
