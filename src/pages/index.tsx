@@ -123,7 +123,7 @@ export default function Index(props: Props) {
         <LanyardCard lanyard={lanyard ? lanyard : null} />
       </div>
       <div className="space-y-4">
-        <h1 className="text-2xl font-bold sm:text-3xl">Technologies 💻</h1>
+        <p className="text-2xl font-bold sm:text-3xl">Technologies 💻</p>
         <ul className="grid grid-cols-3 gap-4 sm:grid-cols-4">
           <ListItem icon={SiNodeDotJs} text="Node.js" />
           <ListItem icon={SiJavascript} text="JavaScript" />

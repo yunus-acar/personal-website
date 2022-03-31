@@ -87,11 +87,11 @@ export default function App({ Component, pageProps, router }: AppProps) {
   const navLinks = (
     <>
       <NavLink href="/" closeMenu={closeMenu}>
-        <GoHome />
+        <GoHome className="text-xl" />
       </NavLink>
 
       <NavLink href="/contact" closeMenu={closeMenu}>
-        <GoCommentDiscussion />
+        <GoCommentDiscussion className="text-xl" />
       </NavLink>
       <li>
         <a
@@ -100,7 +100,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
           rel="noreferrer"
           className={navlinkClassname}
         >
-          <GoBook />
+          <GoBook className="text-xl" />
         </a>
       </li>
     </>
@@ -205,7 +205,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
 }
 
 const navlinkClassname =
-  "block py-3 font-mono text-lg dark:hover:text-white no-underline dark:sm:hover:bg-white/10 rounded-md sm:inline-block sm:px-5 sm:text-sm sm:font-normal sm:underline sm:bg-white/0 sm:hover:bg-gray-900/5 sm:rounded-full";
+  "block py-3 font-mono text-lg dark:hover:text-white no-underline dark:sm:hover:bg-white/10 rounded-md sm:inline-block sm:px-5 sm:text-sm sm:font-normal sm:underline sm:bg-white/0 sm:hover:bg-gray-900/5 sm:rounded-full ";
 
 function NavLink(props: {
   children: ReactNode;
