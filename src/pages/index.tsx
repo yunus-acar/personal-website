@@ -99,9 +99,8 @@ export default function Index(props: Props) {
         </h1>
 
         <p className="opacity-80">
-          I'm a 18 year old software developer from the Turkey. I'm interested
-          in full stack web development including large scale front end
-          applications and performance server side code.
+          18 years old developer. Mainly developing frontend websites, including
+          backend development which resolves to fullstack development.
         </p>
       </div>
 
