@@ -150,7 +150,7 @@ export default function Index(props: Props) {
         </ul>
       </div>
       <div className="space-y-4">
-        <p className="text-2xl font-bold sm:text-3xl">Organizations</p>
+        <p className="text-2xl font-bold sm:text-3xl">Organizations 🏢</p>
         <ul className="grid grid-cols-2 auto-cols-max gap-1 sm:grid-cols-2 sm:gap-3">
           {props.orgDetail.map((org: GithubOrganization) => (
             <li className="flex items-start" key={org.login}>
