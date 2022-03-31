@@ -50,8 +50,6 @@ export default function App({ Component, pageProps, router }: AppProps) {
     if (typeof window === "undefined" || !ballCanvas.current) {
       return;
     }
-
-    return loadCursor(ballCanvas.current);
   }, []);
 
   useEffect(() => {
