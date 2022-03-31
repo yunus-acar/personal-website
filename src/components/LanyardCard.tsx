@@ -47,7 +47,7 @@ export const LanyardCard = ({ lanyard }: Props) => {
           ) : lanyard?.discord_status === "idle" ? (
             <LanyardStatus color="yellow" />
           ) : (
-            <LanyardStatus color="green" />
+            <LanyardStatus color="gray" />
           )}
         </div>
         {lanyard?.listening_to_spotify && (
@@ -79,65 +79,42 @@ export const LanyardCard = ({ lanyard }: Props) => {
             </div>
           </>
         )}
-        {lanyard?.activities.map(
-          (
-            activity: {
-              name: {} | null | undefined;
-              application_id: any;
-              assets: { large_image: any };
-              details:
-                | boolean
-                | ReactChild
-                | ReactFragment
-                | ReactPortal
-                | null
-                | undefined;
-              state:
-                | boolean
-                | ReactChild
-                | ReactFragment
-                | ReactPortal
-                | null
-                | undefined;
-            },
-            i: number
-          ) => {
-            return activity.name === "Spotify" ? (
-              <></>
-            ) : activity.name === "Custom Status" ? (
-              <></>
-            ) : (
-              <div key={i + 1}>
-                <hr className="h-0.5 mb-4	bg-gray-600	border-none	rounded-full" />
-                <div className="inline-flex items-center">
-                  <div
-                    className="max-w-md max-h-12 
+        {lanyard?.activities.map((activity, i) => {
+          return activity.name === "Spotify" ? (
+            <></>
+          ) : activity.name === "Custom Status" ? (
+            <></>
+          ) : (
+            <div key={i + 1}>
+              <hr className="h-0.5 mb-4	bg-gray-600	border-none	rounded-full" />
+              <div className="inline-flex items-center">
+                <div
+                  className="max-w-md max-h-12 
 								my-auto 
 								rounded pointer-events-none select-none 
 								ring-2 ring-gray-500"
-                  >
-                    <img
-                      src={`https://cdn.discordapp.com/app-assets/${activity.application_id}/${activity.assets?.large_image}.webp`}
-                      alt={`${lanyard?.spotify?.song} - ${lanyard?.spotify?.artist}`}
-                      className="w-12 h-12 rounded"
-                    />
-                  </div>
-                  <div className="flex-1 	ml-4">
-                    <p className="text-base font-extrabold line-clamp-1 tracking-wide overflow-ellipsis text-gray-900 dark:text-white">
-                      {activity.name}
-                    </p>
-                    <p className="mt-1 text-xs tracking-wide font-medium 	text-gray-400">
-                      {activity.details}
-                    </p>
-                    <p className="mt-1 text-xs tracking-wide font-medium 	text-gray-400">
-                      {activity.state}
-                    </p>
-                  </div>
+                >
+                  <img
+                    src={`https://cdn.discordapp.com/app-assets/${activity.application_id}/${activity.assets?.large_image}.webp`}
+                    alt={`${lanyard?.spotify?.song} - ${lanyard?.spotify?.artist}`}
+                    className="w-12 h-12 rounded"
+                  />
+                </div>
+                <div className="flex-1 	ml-4">
+                  <p className="text-base font-extrabold line-clamp-1 tracking-wide overflow-ellipsis text-gray-900 dark:text-white">
+                    {activity.name}
+                  </p>
+                  <p className="mt-1 text-xs tracking-wide font-medium 	text-gray-400">
+                    {activity.details}
+                  </p>
+                  <p className="mt-1 text-xs tracking-wide font-medium 	text-gray-400">
+                    {activity.state}
+                  </p>
                 </div>
               </div>
-            );
-          }
-        )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
