@@ -155,7 +155,7 @@ export default function Index(props: Props) {
           {props.orgDetail.map((org: GithubOrganization) => (
             <li className="flex items-start" key={org.login}>
               <a
-                href={org.url}
+                href={org.html_url}
                 target="_blank"
                 rel="noreferrer"
                 aria-label={org.login}
@@ -168,7 +168,7 @@ export default function Index(props: Props) {
               </a>
               <span>
                 <a
-                  href={org.url}
+                  href={org.html_url}
                   target="_blank"
                   rel="noreferrer"
                   aria-label={org.login}
@@ -302,6 +302,7 @@ export interface GithubOrganization {
   name: string;
   blog: string;
   email: string;
+  html_url: string;
 }
 export const getStaticProps: GetStaticProps<Props> = async function () {
   const pinnedRepos = await fetch(
