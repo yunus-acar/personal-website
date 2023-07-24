@@ -102,7 +102,7 @@ export default function Index(props: Props) {
         </h1>
 
         <p className="opacity-80">
-          19 years old a developer. Mainly developing frontend websites, including
+          20 years old a developer. Mainly developing frontend websites, including
           backend development which resolves to fullstack development.
         </p>
       </div>
