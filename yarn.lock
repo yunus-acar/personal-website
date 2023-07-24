@@ -480,14 +480,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:17.0.41":
-  version: 17.0.41
-  resolution: "@types/react@npm:17.0.41"
+"@types/react@npm:17.0.30":
+  version: 17.0.30
+  resolution: "@types/react@npm:17.0.30"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 1b086ec0ea5d666f05e19e0724e41278d27a2ca29a2cd71b9d9ab3fe27dba233806eb728d744e092c9fe9637ac738d8c5a05983cde84d215342949b47ecba2ef
+  checksum: e3aaac1b8fda6e3622b75db0bd7d8dc412c2f2b77a00afdd32cae8c71fb0b1ca6926ab1fbe1c536dd51d96c0ba372738993837a8df1637637aaab7b86e421b7f
   languageName: node
   linkType: hard
 
@@ -6348,7 +6348,7 @@ __metadata:
     "@types/node": 17.0.18
     "@types/nprogress": 0.2.0
     "@types/number-to-words": 1.2.1
-    "@types/react": 17.0.41
+    "@types/react": 17.0.30
     "@types/react-dom": 17.0.14
     "@types/spotify-web-api-node": 5.0.7
     "@types/tailwindcss": 3.0.9
