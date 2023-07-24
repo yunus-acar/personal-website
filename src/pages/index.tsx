@@ -1,33 +1,35 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useReducer } from "react";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 import { AnimatePresence, motion } from "framer-motion";
 import { GetStaticProps } from "next";
+import { useReducer } from "react";
 import {
-  SiPuppeteer,
-  SiSelenium,
+  SiApachekafka,
+  SiApollographql,
   SiDocker,
+  SiExpo,
+  SiExpress,
+  SiFigma,
   SiGit,
   SiGithub,
-  SiApollographql,
-  SiFigma,
+  SiGraphql,
+  SiInstagram,
+  SiJavascript,
   SiMongodb,
+  SiNestjs,
   SiNextdotjs as SiNextDotJs,
   SiNodedotjs as SiNodeDotJs,
   SiPostgresql,
+  SiPrisma,
+  SiPuppeteer,
+  SiRabbitmq,
   SiReact,
   SiRedis,
-  SiStyledcomponents as SiStyledComponents,
+  SiSelenium,
   SiTailwindcss,
   SiTwitter,
   SiTypescript,
-  SiWebstorm,
-  SiGraphql,
-  SiExpress,
-  SiPrisma,
-  SiVisualstudiocode,
-  SiInstagram,
-  SiJavascript,
-  SiDiscord,
 } from "react-icons/si";
 import {
   Data as LanyardData,
@@ -35,12 +37,10 @@ import {
   LanyardResponse,
   useLanyard,
 } from "use-lanyard";
-import { PinnedRepo, useGitHubPinnedRepos } from "../hooks/github";
+import { LanyardCard } from "../components/LanyardCard";
 import { ListItem } from "../components/list-item";
 import { DISCORD_ID } from "../components/song";
-import dayjs from "dayjs";
-import { LanyardCard } from "../components/LanyardCard";
-import relativeTime from "dayjs/plugin/relativeTime";
+import { PinnedRepo, useGitHubPinnedRepos } from "../hooks/github";
 
 dayjs.extend(relativeTime);
 
@@ -102,8 +102,8 @@ export default function Index(props: Props) {
         </h1>
 
         <p className="opacity-80">
-          20 years old a developer. Mainly developing frontend websites, including
-          backend development which resolves to fullstack development.
+          20 years old a developer. Mainly developing frontend websites,
+          including backend development which resolves to fullstack development.
         </p>
       </div>
 
@@ -144,9 +144,11 @@ export default function Index(props: Props) {
           <ListItem icon={SiNextDotJs} text="Next.js" />
           <ListItem icon={SiTailwindcss} text="TailwindCSS" />
           <ListItem icon={SiFigma} text="Figma" />
-          <ListItem icon={SiWebstorm} text="WebStorm" />
-          <ListItem icon={SiVisualstudiocode} text="VSCode" />
           <ListItem icon={SiGit} text="Git" />
+          <ListItem icon={SiNestjs} text="NestJS" />
+          <ListItem icon={SiApachekafka} text="Kafka" />
+          <ListItem icon={SiRabbitmq} text="RabbitMQ" />
+          <ListItem icon={SiExpo} text="Expo" />
         </ul>
       </div>
       <div className="space-y-4">
@@ -306,7 +308,7 @@ export interface GithubOrganization {
 }
 export const getStaticProps: GetStaticProps<Props> = async function () {
   const pinnedRepos = await fetch(
-    "https://gh-pinned-repos.egoist.sh/?username=yunus-acar"
+    "https://gh-pinned-repos.egoist.dev/?username=yunus-acar"
   ).then(async (response) => response.json() as Promise<PinnedRepo[]>);
   const githubOrganizations = await fetch(
     "https://api.github.com/users/yunus-acar/orgs"

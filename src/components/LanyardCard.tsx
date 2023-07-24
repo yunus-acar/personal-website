@@ -1,7 +1,5 @@
-import React from "react";
-import { Data as LanyardData } from "use-lanyard";
 import { SiSpotify } from "react-icons/si";
-import { ReactChild, ReactFragment, ReactPortal } from "react";
+import { Data as LanyardData } from "use-lanyard";
 
 interface Props {
   lanyard: LanyardData | null;
@@ -36,9 +34,11 @@ export const LanyardCard = ({ lanyard }: Props) => {
             <p className="text-base font-extrabold line-clamp-1 tracking-wide overflow-ellipsis text-gray-900 dark:text-white">
               {lanyard?.discord_user.username}
             </p>
-            <p className="mt-1 text-xs tracking-wide font-medium 	text-gray-400">
-              #{lanyard?.discord_user.discriminator}
-            </p>
+            {lanyard?.discord_user.discriminator !== "0" && (
+              <p className="mt-1 text-xs tracking-wide font-medium 	text-gray-400">
+                #{lanyard?.discord_user.discriminator}
+              </p>
+            )}
           </div>
           {lanyard?.discord_status === "online" ? (
             <LanyardStatus color="green" />

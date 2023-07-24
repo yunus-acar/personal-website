@@ -1,14 +1,13 @@
 import { useRouter } from "next/router";
-import React from "react";
 import { toast } from "react-hot-toast";
 import { HiOutlineMail } from "react-icons/hi";
-import { RiPhoneLine, RiSendPlane2Line } from "react-icons/ri";
+import { RiSendPlane2Line } from "react-icons/ri";
 import { SiDiscord, SiTwitter } from "react-icons/si";
 import { useLanyard } from "use-lanyard";
+import { LanyardCard } from "../components/LanyardCard";
 import { ListItem } from "../components/list-item";
 import { DISCORD_ID } from "../components/song";
 import { form } from "../util/client";
-import { LanyardCard } from "../components/LanyardCard";
 const statusMap = {
   online: "bg-green-500",
   idle: "bg-yellow-500",
@@ -110,8 +109,10 @@ export default function Talk() {
                 lanyard ? (
                   <span className="flex items-center space-x-1">
                     <span>
-                      {lanyard.discord_user.username}#
-                      {lanyard.discord_user.discriminator}
+                      {lanyard.discord_user.username}
+                      {lanyard.discord_user.discriminator !== "0"
+                        ? "#" + lanyard.discord_user.discriminator
+                        : null}
                     </span>
 
                     <span

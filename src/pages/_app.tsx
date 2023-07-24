@@ -1,26 +1,19 @@
-import React, {
-  ReactNode,
-  StrictMode,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Squash as Hamburger } from "hamburger-react";
 import { AppProps } from "next/app";
 import Head from "next/head";
+import Link from "next/link";
 import { Router } from "next/router";
 import NProgress from "nprogress";
-import Link from "next/link";
-import { SWRConfig } from "swr";
-import { Toaster } from "react-hot-toast";
-import { Squash as Hamburger } from "hamburger-react";
-import { loadCursor } from "../util/cursor";
-import { DISCORD_ID, Song } from "../components/song";
-import { GoHome, GoCommentDiscussion, GoBook } from "react-icons/go";
-import "react-tippy/dist/tippy.css";
-import "tailwindcss/tailwind.css";
-import "../styles/global.css";
 import "nprogress/nprogress.css";
-import { AnimatePresence, motion } from "framer-motion";
+import { ReactNode, StrictMode, useEffect, useRef, useState } from "react";
+import { Toaster } from "react-hot-toast";
+import { GoBook, GoCommentDiscussion, GoHome } from "react-icons/go";
+import "react-tippy/dist/tippy.css";
+import { SWRConfig } from "swr";
+import "tailwindcss/tailwind.css";
+import { DISCORD_ID, Song } from "../components/song";
+import "../styles/global.css";
 import { fetcher } from "../util/fetcher";
 
 Router.events.on("routeChangeStart", () => NProgress.start());
@@ -94,7 +87,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
       <li>
         <a
           target="_blank"
-          href="https://yunus.live/"
+          href="https://medium.com/@yunus-acar"
           rel="noreferrer"
           className={navlinkClassname}
         >
