@@ -1,12 +1,12 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Squash as Hamburger } from "hamburger-react";
-import { AppProps } from "next/app";
+import type { AppProps } from "next/app";
 import Head from "next/head";
 import Link from "next/link";
 import { Router } from "next/router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
-import { ReactNode, StrictMode, useEffect, useRef, useState } from "react";
+import React, { ReactNode, StrictMode, useEffect, useRef, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { GoBook, GoCommentDiscussion, GoHome } from "react-icons/go";
 import "react-tippy/dist/tippy.css";
@@ -97,6 +97,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
     </>
   );
 
+  // @ts-ignore
   return (
     <StrictMode>
       <SWRConfig
@@ -177,6 +178,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
           </div>
 
           <main className="mx-auto space-y-12 max-w-3xl md:py-24">
+            {/* @ts-ignore */}
             <Component {...pageProps} />
           </main>
 

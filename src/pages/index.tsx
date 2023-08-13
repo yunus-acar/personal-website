@@ -338,6 +338,6 @@ export const getStaticProps: GetStaticProps<Props> = async function () {
       ghOrg: githubOrganizations,
       orgDetail,
     },
-    revalidate: 120,
+    revalidate: 60 * 60 * 12,
   };
 };
