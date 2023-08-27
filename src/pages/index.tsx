@@ -58,9 +58,6 @@ export default function Index(props: Props) {
   const { data: lanyard } = useLanyard(DISCORD_ID, {
     fallbackData: props.lanyard,
   });
-  console.log("🌵💜🐢", props.orgDetail);
-
-  // console.log("🌵💜🐢", lanyard);
 
   return (
     <>
@@ -102,8 +99,7 @@ export default function Index(props: Props) {
         </h1>
 
         <p className="opacity-80">
-          20 years old a developer. Mainly developing frontend websites,
-          including backend development which resolves to fullstack development.
+         I'm 20 years old, a dedicated full stack developer. In this era where the digital world takes shape with enchanting lines of code, I'm passionate about bringing web projects and mobile applications to life. From front-end to back-end, from user experience to database management, I continuously enhance my skills and stay up-to-date with the latest trends. Through the technologies I employ, I craft designs that are not only aesthetically pleasing but also functional and user-friendly, be it on the web or within mobile apps. Immersed in a lifestyle intertwined with technology, I translate the dance of code into captivating web pages and mobile experiences, leaving a mark on the digital realm. Feel free to get in touch for your projects. I'm eagerly looking forward to infusing the digital world with creative innovation together!
         </p>
       </div>
 
