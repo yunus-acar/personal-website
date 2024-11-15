@@ -8,15 +8,7 @@ interface Props {
 export const LanyardCard = ({ lanyard }: Props) => {
   return (
     <div>
-      <div
-        className="flex flex-col space-y-5 w-full max-w-md 
-					 px-4 py-4  
-					bg-gray-900bg-opacity-50 
-					backdrop-filter backdrop-blur-sm 
-					border-2 border-gray-600 
-					rounded-lg hover:shadow-lg 
-					transition ease-in-out duration-300"
-      >
+      <div className="flex flex-col space-y-5 w-full max-w-md px-4 py-4 bg-gray-900 bg-opacity-50 backdrop-filter backdrop-blur-sm border-2 border-gray-600 rounded-lg hover:shadow-lg transition ease-in-out duration-300">
         <div className="inline-flex items-center">
           <div
             className="max-w-md max-h-12 
@@ -62,7 +54,7 @@ export const LanyardCard = ({ lanyard }: Props) => {
 								ring-2 ring-gray-500"
               >
                 <img
-                  src={lanyard?.spotify?.album_art_url}
+                  src={lanyard?.spotify?.album_art_url || ""}
                   alt={`${lanyard?.spotify?.song} - ${lanyard?.spotify?.artist}`}
                   className="w-12 h-12 rounded"
                 />

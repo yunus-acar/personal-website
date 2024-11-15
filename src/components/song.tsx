@@ -1,39 +1,38 @@
-import React from 'react';
-import {useLanyard} from 'use-lanyard';
-import {SiSpotify} from 'react-icons/si';
-
-export const DISCORD_ID = '470385774584397837';
+import React from "react";
+import { useLanyard } from "use-lanyard";
+import { SiSpotify } from "react-icons/si";
+import { data } from "../util/constant";
 
 export function Song() {
-	const {data: user} = useLanyard(DISCORD_ID);
+  const { data: user } = useLanyard(`${data.discordId}`);
 
-	const c =
-		'text-right select-none sm:select-text w-full inline-flex text-lg rounded-sm focus:outline-none focus:opacity-100 focus:ring items-center space-x-2 no-underline opacity-50 hover:opacity-100 h-12 mt-0.5';
+  const c =
+    "text-right select-none sm:select-text w-full inline-flex text-lg rounded-sm focus:outline-none focus:opacity-100 focus:ring items-center space-x-2 no-underline opacity-50 hover:opacity-100 h-12 mt-0.5";
 
-	if (!user || !user.spotify) {
-		return (
-			<p className={c}>
-				<span>Not playing anything</span>
-				<span>
-					<SiSpotify />
-				</span>
-			</p>
-		);
-	}
+  if (!user || !user.spotify) {
+    return (
+      <p className={c}>
+        <span>Not playing anything</span>
+        <span>
+          <SiSpotify />
+        </span>
+      </p>
+    );
+  }
 
-	return (
-		<a
-			target="_blank"
-			rel="noreferrer"
-			className={c}
-			href={`https://open.spotify.com/track/${user.spotify.track_id}`}
-		>
-			<span className="truncate">
-				Listening to {user.spotify.song} by {user.spotify.artist}
-			</span>
-			<span>
-				<SiSpotify />
-			</span>
-		</a>
-	);
+  return (
+    <a
+      target="_blank"
+      rel="noreferrer"
+      className={c}
+      href={`https://open.spotify.com/track/${user.spotify.track_id}`}
+    >
+      <span className="truncate">
+        Listening to {user.spotify.song} by {user.spotify.artist}
+      </span>
+      <span>
+        <SiSpotify />
+      </span>
+    </a>
+  );
 }

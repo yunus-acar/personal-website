@@ -1,57 +1,52 @@
-import {api} from '../../server/api';
-import {z} from 'zod';
-import {DISCORD_WEBHOOK} from '../../server/constants';
-import {NextkitClientException} from 'nextkit/client';
+import { z } from "zod";
 
 const schema = z.object({
-	email: z.string().email(),
-	body: z.string().max(500).min(10),
+  email: z.string().email(),
+  body: z.string().max(500).min(10),
 });
 
-export default api({
-	async POST({req}) {
-		const body = schema.parse(req.body);
+import { NextApiRequest, NextApiResponse } from "next";
+import { DISCORD_WEBHOOK } from "@/util/constant";
 
-		const result = await fetch(DISCORD_WEBHOOK, {
-			method: 'POST',
-			headers: {'Content-Type': 'application/json'},
-			body: JSON.stringify({
-				content: 'new email innit',
-				embeds: [
-					{
-						description: body.body,
-						author: {
-							name: body.email,
-						},
-						fields: [
-							{
-								name: 'ip',
-								value:
-									req.headers['x-forwarded-for'] ??
-									req.connection.remoteAddress ??
-									'unknown!?',
-							},
-						],
-					},
-				],
-			}),
-		});
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
+  const body = schema.parse(req.body);
 
-		if (result.status >= 400) {
-			throw new NextkitClientException(
-				result.status,
-				'Error sending notification',
-			);
-		}
+  const result = await fetch(DISCORD_WEBHOOK, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      content: "new email innit",
+      embeds: [
+        {
+          description: body.body,
+          author: {
+            name: body.email,
+          },
+          fields: [
+            {
+              name: "ip",
+              value:
+                req.headers["x-forwarded-for"] ??
+                req.socket.remoteAddress ??
+                "unknown!?",
+            },
+          ],
+        },
+      ],
+    }),
+  });
 
-		if (req.headers['content-type'] === 'application/json') {
-			return {
-				sent: true,
-			};
-		}
+  if (result.status >= 400) {
+    throw new Error("Error sending notification");
+  }
 
-		return {
-			_redirect: '/thanks',
-		};
-	},
-});
+  if (req.headers["content-type"] === "application/json") {
+    res.status(200).json({ sent: true });
+    return;
+  }
+
+  res.redirect(302, "/thanks");
+}

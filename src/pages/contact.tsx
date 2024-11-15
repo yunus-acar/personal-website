@@ -2,12 +2,12 @@ import { useRouter } from "next/router";
 import { toast } from "react-hot-toast";
 import { HiOutlineMail } from "react-icons/hi";
 import { RiSendPlane2Line } from "react-icons/ri";
-import { SiDiscord, SiTwitter } from "react-icons/si";
+import { SiDiscord, SiX } from "react-icons/si";
 import { useLanyard } from "use-lanyard";
-import { LanyardCard } from "../components/LanyardCard";
-import { ListItem } from "../components/list-item";
-import { DISCORD_ID } from "../components/song";
-import { form } from "../util/client";
+import { LanyardCard } from "@/components/lanyard-card";
+import { ListItem } from "@/components/list-item";
+import { data } from "@/util/constant";
+
 const statusMap = {
   online: "bg-green-500",
   idle: "bg-yellow-500",
@@ -17,7 +17,7 @@ const statusMap = {
 
 export default function Talk() {
   const router = useRouter();
-  const { data: lanyard } = useLanyard(DISCORD_ID);
+  const { data: lanyard } = useLanyard(`${data.discordId}`);
 
   return (
     <div className="space-y-4">
@@ -37,16 +37,14 @@ export default function Talk() {
               event.preventDefault();
 
               const values = Object.fromEntries(
-                new FormData(event.target as HTMLFormElement).entries()
+                new FormData(event.target as HTMLFormElement).entries(),
               );
 
-              const promise = form.post(
-                {},
-                {
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify(values),
-                }
-              );
+              const promise = fetch("/api/form", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(values),
+              });
 
               await toast
                 .promise(promise, {
@@ -100,8 +98,8 @@ export default function Talk() {
 
         <div>
           <ul className="space-y-2 list-disc list-inside">
-            <ListItem icon={HiOutlineMail} text="me@yunusacar.dev" />
-            <ListItem icon={SiTwitter} text="yunus_acar22" />
+            <ListItem icon={HiOutlineMail} text={data.email} />
+            <ListItem icon={SiX} text={data.twitter} />
 
             <ListItem
               icon={SiDiscord}

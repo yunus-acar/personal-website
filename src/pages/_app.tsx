@@ -1,20 +1,26 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Squash as Hamburger } from "hamburger-react";
-import type { AppProps } from "next/app";
 import Head from "next/head";
 import Link from "next/link";
 import { Router } from "next/router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
-import React, { ReactNode, StrictMode, useEffect, useRef, useState } from "react";
+import React, {
+  ReactNode,
+  StrictMode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Toaster } from "react-hot-toast";
 import { GoBook, GoCommentDiscussion, GoHome } from "react-icons/go";
 import "react-tippy/dist/tippy.css";
 import { SWRConfig } from "swr";
 import "tailwindcss/tailwind.css";
-import { DISCORD_ID, Song } from "../components/song";
+import { Song } from "../components/song";
 import "../styles/global.css";
-import { fetcher } from "../util/fetcher";
+import { data } from "../util/constant";
+import { NextScript } from "next/document";
 
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -87,7 +93,7 @@ export default function App({ Component, pageProps, router }: any) {
       <li>
         <a
           target="_blank"
-          href="https://medium.com/@yunus-acar"
+          href={data.medium}
           rel="noreferrer"
           className={navlinkClassname}
         >
@@ -97,25 +103,22 @@ export default function App({ Component, pageProps, router }: any) {
     </>
   );
 
-  // @ts-ignore
   return (
     <StrictMode>
+      <Head>
+        <title>{`${data.fullName} • ${data.title}`}</title>
+      </Head>
       <SWRConfig
         value={{
           fallback: {
-            // SSR Lanyard's data
-            [`lanyard:${DISCORD_ID}`]: pageProps?.lanyard as unknown,
-            "https://gh-pinned-repos.egoist.sh/?username=yunus-acar":
+            [`lanyard:${data.discordId}`]: pageProps?.lanyard as unknown,
+            [`https://gh-pinned-repos-tsj7ta5xfhep.deno.dev/?username=${data.github}`]:
               pageProps?.pinnedRepos as unknown,
           },
-          fetcher,
+          fetcher: (url: string) => fetch(url).then((res) => res.json()),
         }}
       >
         <Toaster toastOptions={{ position: "top-left" }} />
-
-        <Head>
-          <title>Yunus Emre Acar</title>
-        </Head>
 
         <AnimatePresence>
           {mobileMenuOpen && (
@@ -178,13 +181,14 @@ export default function App({ Component, pageProps, router }: any) {
           </div>
 
           <main className="mx-auto space-y-12 max-w-3xl md:py-24">
-            {/* @ts-ignore */}
             <Component {...pageProps} />
           </main>
 
           <footer className="p-4 py-10 mx-auto mt-20 max-w-3xl border-t-2 border-gray-900/10 dark:border-white/10 opacity-50">
-            <h1 className="text-3xl font-bold">Yunus Emre Acar</h1>
-            <p>Software Developer • {new Date().getFullYear()}</p>
+            <h1 className="text-3xl font-bold">{data.fullName}</h1>
+            <p>
+              {data.title} • {new Date().getFullYear()}
+            </p>
           </footer>
         </div>
 
@@ -207,10 +211,12 @@ function NavLink(props: {
 }) {
   return (
     <li>
-      <Link href={props.href}>
-        <a className={navlinkClassname} onClick={props.closeMenu}>
-          {props.children}
-        </a>
+      <Link
+        href={props.href}
+        className={navlinkClassname}
+        onClick={props.closeMenu}
+      >
+        {props.children}
       </Link>
     </li>
   );

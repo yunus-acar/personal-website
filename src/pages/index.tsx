@@ -1,46 +1,19 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { AnimatePresence, motion } from "framer-motion";
 import { GetStaticProps } from "next";
 import { useReducer } from "react";
-import {
-  SiApachekafka,
-  SiApollographql,
-  SiDocker,
-  SiExpo,
-  SiExpress,
-  SiFigma,
-  SiGit,
-  SiGithub,
-  SiGraphql,
-  SiInstagram,
-  SiJavascript,
-  SiMongodb,
-  SiNestjs,
-  SiNextdotjs as SiNextDotJs,
-  SiNodedotjs as SiNodeDotJs,
-  SiPostgresql,
-  SiPrisma,
-  SiPuppeteer,
-  SiRabbitmq,
-  SiReact,
-  SiRedis,
-  SiSelenium,
-  SiTailwindcss,
-  SiTwitter,
-  SiTypescript,
-} from "react-icons/si";
+import { SiGithub, SiInstagram, SiLinkedin, SiX } from "react-icons/si";
 import {
   Data as LanyardData,
   LanyardError,
   LanyardResponse,
   useLanyard,
 } from "use-lanyard";
-import { LanyardCard } from "../components/LanyardCard";
-import { ListItem } from "../components/list-item";
-import { DISCORD_ID } from "../components/song";
-import { PinnedRepo, useGitHubPinnedRepos } from "../hooks/github";
+import { LanyardCard } from "@/components/lanyard-card";
+import { ListItem } from "@/components/list-item";
+import { PinnedRepo } from "@/types/github";
+import { data } from "@/util/constant";
 
 dayjs.extend(relativeTime);
 
@@ -52,58 +25,58 @@ interface Props {
 }
 
 export default function Index(props: Props) {
-  const { data: projects = props.pinnedRepos } =
-    useGitHubPinnedRepos("yunus-acar");
-
-  const { data: lanyard } = useLanyard(DISCORD_ID, {
-    fallbackData: props.lanyard,
-  });
+  const { data: lanyard } = useLanyard(`${data.discordId}`);
 
   return (
     <>
       <div className="space-y-4">
         <div className="flex items-center space-x-3">
           <a
-            href="https://github.com/yunus-acar"
+            href={`https://github.com/${data.github}`}
             target="_blank"
             rel="noreferrer"
             aria-label="GitHub Profile"
           >
-            <SiGithub className="w-7 h-7" />
+            <SiGithub className="size-5" />
             <span className="sr-only">GitHub Profile</span>
           </a>
 
           <a
-            href="https://twitter.com/yunus_acar22"
+            href={`https://twitter.com/${data.twitter}`}
             target="_blank"
             rel="noreferrer"
             aria-label="Twitter Profile"
           >
-            <SiTwitter className="w-7 h-7" />
+            <SiX className="size-5" />
             <span className="sr-only">Twitter Profile</span>
           </a>
           <a
-            href="https://www.instagram.com/yunus.acar22/"
+            href={`https://instagram.com/${data.instagram}`}
             target="_blank"
             rel="noreferrer"
-            aria-label="Twitter Profile"
+            aria-label="Instagram Profile"
           >
-            <SiInstagram className="w-7 h-7" />
+            <SiInstagram className="size-5" />
             <span className="sr-only">Instagram Profile</span>
+          </a>
+          <a
+            href={`https://www.linkedin.com/in/${data.linkedin}`}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="LinkedIn Profile"
+          >
+            <SiLinkedin className="size-5" />
+            <span className="sr-only">LinkedIn Profile</span>
           </a>
         </div>
 
         <h1 className="text-3xl font-bold sm:text-4xl md:text-6xl">
           Hey, I'm{" "}
-          <span className="text-blue-700 dark:text-white">Yunus Emre</span> ✌️
+          <span className="text-blue-700 dark:text-white">{data.name}</span> ✌️
         </h1>
 
-        <p className="opacity-80">
-         I'm 20 years old, a dedicated full stack developer. In this era where the digital world takes shape with enchanting lines of code, I'm passionate about bringing web projects and mobile applications to life. From front-end to back-end, from user experience to database management, I continuously enhance my skills and stay up-to-date with the latest trends. Through the technologies that I am using, I craft designs that are not only aesthetically pleasing but also functional and user-friendly, be it on the web or within mobile apps.
-        </p>
-         <p className="opacity-80">
-        Immersed in a lifestyle intertwined with technology, I translate the dance of code into captivating web pages and mobile experiences, leaving a mark on the digital realm. Feel free to get in touch for your projects. I'm eagerly looking forward to infusing the digital world with creative innovation together!
-        </p>
+        <p className="opacity-80">{data.about.split("|")[0]}</p>
+        <p className="opacity-80">{data.about.split("|")[1]}</p>
       </div>
 
       <div className="space-y-4">
@@ -114,7 +87,7 @@ export default function Index(props: Props) {
         </p>
 
         <div className="grid grid-cols-1 auto-cols-max gap-1 sm:grid-cols-2 sm:gap-3">
-          {projects.map((project: PinnedRepo) => (
+          {props.pinnedRepos.map((project: PinnedRepo) => (
             <ProjectCard key={project.repo} repo={project} />
           ))}
         </div>
@@ -126,28 +99,9 @@ export default function Index(props: Props) {
       <div className="space-y-4">
         <p className="text-2xl font-bold sm:text-3xl">Technologies 💻</p>
         <ul className="grid grid-cols-3 gap-4 sm:grid-cols-4">
-          <ListItem icon={SiNodeDotJs} text="Node.js" />
-          <ListItem icon={SiJavascript} text="JavaScript" />
-          <ListItem icon={SiTypescript} text="TypeScript" />
-          <ListItem icon={SiExpress} text="Express.js" />
-          <ListItem icon={SiGraphql} text="Graphql" />
-          <ListItem icon={SiApollographql} text="Apollo Graphql" />
-          <ListItem icon={SiPuppeteer} text="Puppeteer" />
-          <ListItem icon={SiSelenium} text="Selenium" />
-          <ListItem icon={SiMongodb} text="Mongo" />
-          <ListItem icon={SiPostgresql} text="Postgres" />
-          <ListItem icon={SiRedis} text="Redis" />
-          <ListItem icon={SiPrisma} text="Prisma" />
-          <ListItem icon={SiDocker} text="Docker" />
-          <ListItem icon={SiReact} text="React.js" />
-          <ListItem icon={SiNextDotJs} text="Next.js" />
-          <ListItem icon={SiTailwindcss} text="TailwindCSS" />
-          <ListItem icon={SiFigma} text="Figma" />
-          <ListItem icon={SiGit} text="Git" />
-          <ListItem icon={SiNestjs} text="NestJS" />
-          <ListItem icon={SiApachekafka} text="Kafka" />
-          <ListItem icon={SiRabbitmq} text="RabbitMQ" />
-          <ListItem icon={SiExpo} text="Expo" />
+          {data.technologies.map((tech, i) => (
+            <ListItem key={i} icon={tech.icon} text={tech.name} />
+          ))}
         </ul>
       </div>
       <div className="space-y-4">
@@ -307,27 +261,38 @@ export interface GithubOrganization {
 }
 export const getStaticProps: GetStaticProps<Props> = async function () {
   const pinnedRepos = await fetch(
-    "https://gh-pinned-repos.egoist.dev/?username=yunus-acar"
-  ).then(async (response) => response.json() as Promise<PinnedRepo[]>);
+    `https://gh-pinned-repos-tsj7ta5xfhep.deno.dev/?username=${data.github}`,
+  )
+    .then(async (response) => response.json() as Promise<PinnedRepo[]>)
+    .catch(() => []);
+
   const githubOrganizations = await fetch(
-    "https://api.github.com/users/yunus-acar/orgs"
-  ).then(async (response) => response.json() as Promise<GithubOrganization[]>);
+    `https://api.github.com/users/${data.github}/orgs`,
+  )
+    .then(async (response) => response.json() as Promise<GithubOrganization[]>)
+    .catch(() => []);
+
   let orgDetail = [];
+
   for (const org of githubOrganizations) {
     const orgDetailResponse = await fetch(org.url).then(
-      async (response) => response.json() as Promise<GithubOrganization>
+      async (response) => response.json() as Promise<GithubOrganization>,
     );
     orgDetail.push(orgDetailResponse);
   }
 
   const lanyard = await fetch(
-    `https://api.lanyard.rest/v1/users/${DISCORD_ID}`
+    `https://api.lanyard.rest/v1/users/${data.discordId}`,
   );
 
   const lanyardBody = (await lanyard.json()) as LanyardResponse;
 
   if ("error" in lanyardBody) {
-    throw new LanyardError(lanyard.status, lanyardBody.error.message);
+    throw new LanyardError(
+      new Request("https://api.lanyard.rest/v1/users/470385774584397837"),
+      new Response(JSON.stringify(lanyardBody)),
+      lanyardBody,
+    );
   }
 
   return {

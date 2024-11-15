@@ -1,4 +1,4 @@
-const bday = new Date('16 June 2003 00:07:00 GMT');
+const bday = new Date("16 June 2003 00:07:00 GMT");
 const ageMilliseconds = Date.now() - bday.getTime();
 
 export const MILLISECOND = 1;
@@ -8,4 +8,4 @@ export const HOUR = MINUTE * 60;
 export const DAY = HOUR * 24;
 export const YEAR = DAY * 365;
 
-export const age = ageMilliseconds / YEAR;
+export const age = (ageMilliseconds / YEAR).toFixed();
