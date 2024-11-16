@@ -37,7 +37,7 @@ export const data = {
   linkedin: "yunus-acar",
   instagram: "yunus.acar22",
   email: "me@yunusacar.dev",
-  medium: "ttps://medium.com/@yunus-acar",
+  medium: "https://medium.com/@yunus-acar",
   fullName: "Yunus Emre Acar",
   title: "Software Developer",
   favicon: "https://avatars3.githubusercontent.com/u/61521272?s=460&v=4",
