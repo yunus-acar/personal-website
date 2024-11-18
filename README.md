@@ -58,4 +58,4 @@ Key technologies used in this project:
 ## Contact
 
 For any questions or suggestions, feel free to reach out:  
-**Email**: [me@example.com](mailto:me@yunusacar.dev)
+**Email**: [me@yunusacar.dev](mailto:me@yunusacar.dev)
