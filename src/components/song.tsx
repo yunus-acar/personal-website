@@ -1,7 +1,7 @@
 import React from "react";
 import { useLanyard } from "use-lanyard";
 import { SiSpotify } from "react-icons/si";
-import { data } from "../util/constant";
+import { data } from "../utils/constant";
 
 export function Song() {
   const { data: user } = useLanyard(`${data.discordId}`);

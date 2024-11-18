@@ -6,7 +6,7 @@ import { SiDiscord, SiX } from "react-icons/si";
 import { useLanyard } from "use-lanyard";
 import { LanyardCard } from "@/components/lanyard-card";
 import { ListItem } from "@/components/list-item";
-import { data } from "@/util/constant";
+import { data } from "@/utils/constant";
 
 const statusMap = {
   online: "bg-green-500",

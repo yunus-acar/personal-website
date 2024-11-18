@@ -1,5 +1,5 @@
 import { Post } from "@/interfaces/posts";
-import { getPostBySlug, getPostSlugs, markdownToHtml } from "@/util/markdown";
+import { getPostBySlug, getPostSlugs, markdownToHtml } from "@/utils/markdown";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Link from "next/link";
 import React from "react";

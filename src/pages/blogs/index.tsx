@@ -1,6 +1,6 @@
 import BlogCard from "@/components/blog-card";
 import { PostMetadata } from "@/interfaces/posts";
-import { getAllPosts } from "@/util/markdown";
+import { getAllPosts } from "@/utils/markdown";
 import { GetStaticProps } from "next";
 import React from "react";
 

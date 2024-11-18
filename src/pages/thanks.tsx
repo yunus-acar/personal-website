@@ -1,4 +1,4 @@
-import { data } from "../util/constant";
+import { data } from "../utils/constant";
 
 export default function Thanks() {
   return (

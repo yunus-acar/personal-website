@@ -15,7 +15,7 @@ import React, {
 import { Toaster } from "react-hot-toast";
 import { GoBook, GoCommentDiscussion, GoHome } from "react-icons/go";
 import { Song } from "../components/song";
-import { data } from "@/util/constant";
+import { data } from "@/utils/constant";
 
 import "@/styles/global.css";
 import "@/styles/prism.css";

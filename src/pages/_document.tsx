@@ -1,6 +1,6 @@
 import React from "react";
 import Document, { Head, Html, Main, NextScript } from "next/document";
-import { data } from "@/util/constant";
+import { data } from "@/utils/constant";
 
 export default class AppDocument extends Document {
   render() {

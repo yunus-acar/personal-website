@@ -13,7 +13,7 @@ import {
 import { LanyardCard } from "@/components/lanyard-card";
 import { ListItem } from "@/components/list-item";
 import { GithubOrganization, PinnedRepo } from "@/interfaces/github";
-import { data } from "@/util/constant";
+import { data } from "@/utils/constant";
 import ProjectCard from "@/components/project-card";
 
 dayjs.extend(relativeTime);

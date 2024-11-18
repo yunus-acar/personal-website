@@ -6,7 +6,7 @@ const schema = z.object({
 });
 
 import { NextApiRequest, NextApiResponse } from "next";
-import { DISCORD_WEBHOOK } from "@/util/constant";
+import { DISCORD_WEBHOOK } from "@/utils/constant";
 
 export default async function handler(
   req: NextApiRequest,
