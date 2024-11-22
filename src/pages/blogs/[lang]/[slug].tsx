@@ -2,13 +2,28 @@ import { Post } from "@/interfaces/posts";
 import { getPostBySlug, getPostSlugs, markdownToHtml } from "@/utils/markdown";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import React from "react";
 import { LuCalendar, LuClock, LuFolder, LuArrowLeft } from "react-icons/lu";
+import Head from "next/head";
+import { data } from "@/utils/constant";
 
 const Blog = ({ post, langauge }: { post: Post; langauge: "tr" | "en" }) => {
   return (
     <div className="min-h-screen w-full text-gray-100">
+      <Head>
+        <title>{post.metadata.title}</title>
+        <meta name="description" content={post.metadata.excerpt} />
+        <meta property="og:title" content={post.metadata.title} />
+        <meta property="og:description" content={post.metadata.excerpt} />
+        <meta property="og:type" content="article" />
+        <meta
+          property="og:url"
+          content={`${data.domain}/blogs/${langauge}/${post.metadata.slug}`}
+        />
+        <meta name="twitter:title" content={post.metadata.title} />
+        <meta name="twitter:description" content={post.metadata.excerpt} />
+        <meta name="author" content={data.fullName} />
+      </Head>
       <Link href="/blogs" className="inline-flex items-center mb-8">
         <LuArrowLeft className="w-5 h-5 mr-2" />
         Back to Blogs

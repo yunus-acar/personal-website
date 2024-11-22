@@ -16,9 +16,11 @@ import { Toaster } from "react-hot-toast";
 import { GoBook, GoCommentDiscussion, GoHome } from "react-icons/go";
 import { Song } from "../components/song";
 import { data } from "@/utils/constant";
+import * as gtag from "@/utils/gtag";
 
 import "@/styles/global.css";
 import "@/styles/prism.css";
+import Script from "next/script";
 
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -33,6 +35,17 @@ export default function App({ Component, pageProps, router }: any) {
   const toggleMenu = () => {
     setMenuOpen((old) => !old);
   };
+
+  useEffect(() => {
+    const handleRouteChange = (url: any) => {
+      gtag.pageview(url);
+    };
+    router.events.on("routeChangeComplete", handleRouteChange);
+
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router, router.events]);
 
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -99,6 +112,24 @@ export default function App({ Component, pageProps, router }: any) {
     <StrictMode>
       <Head>
         <title>{`${data.fullName} • ${data.title}`}</title>
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+        />
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${gtag.GA_TRACKING_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
+          }}
+        />
       </Head>
 
       <Toaster toastOptions={{ position: "top-left" }} />

@@ -1,3 +1,9 @@
-# https://www.robotstxt.org/robotstxt.html
+# *
 User-agent: *
-Disallow:
+Allow: /
+
+# Host
+Host: https://yunusacar.dev
+
+# Sitemaps
+Sitemap: https://yunusacar.dev/sitemap.xml
