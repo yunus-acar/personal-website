@@ -5,6 +5,7 @@ export interface PostMetadata {
   excerpt: string;
   readingTime: string;
   category: string;
+  langaugeVersion: "tr" | "en";
 }
 
 export interface Post {

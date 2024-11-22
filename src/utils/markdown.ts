@@ -12,16 +12,30 @@ import remarkParse from "remark-parse";
 import rehypeStringify from "rehype-stringify";
 import rehypePrismPlus from "rehype-prism-plus";
 import rehypeCodeTitles from "rehype-code-titles";
+import rehypeExternalLinks from "rehype-external-links";
 
 const postsDirectory = path.join(process.cwd(), "src/posts");
 
 export function getPostSlugs() {
-  return fs.readdirSync(postsDirectory);
+  const languages = ["en", "tr"];
+  const slugs: string[] = [];
+
+  languages.forEach((lang) => {
+    const langDir = path.join(postsDirectory, lang);
+    if (fs.existsSync(langDir)) {
+      const files = fs.readdirSync(langDir);
+      files.forEach((file) => {
+        slugs.push(`${lang}/${file}`);
+      });
+    }
+  });
+
+  return slugs;
 }
 
-export function getPostBySlug(slug: string) {
+export function getPostBySlug(slug: string, lang = "en") {
   const realSlug = slug.replace(/\.md$/, "");
-  const fullPath = path.join(postsDirectory, `${realSlug}.md`);
+  const fullPath = path.join(postsDirectory, `${lang}/${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
@@ -33,6 +47,7 @@ export function getPostBySlug(slug: string) {
       slug: realSlug,
       readingTime: readingTime(content).text,
       category: data.category,
+      langaugeVersion: data.langaugeVersion,
     },
     content,
   };
@@ -49,16 +64,22 @@ export async function markdownToHtml(content: string) {
     })
     .use(rehypePrismPlus)
     .use(rehypeCodeTitles)
+    .use(rehypeExternalLinks, {
+      target: "_blank",
+      rel: ["noopener", "noreferrer"],
+    })
     .use(rehypeStringify)
     .process(content);
   return result.toString();
 }
 
-export function getAllPosts(): PostMetadata[] {
-  const slugs = getPostSlugs();
+export function getAllPosts(lang = "en"): PostMetadata[] {
+  const langDir = path.join(postsDirectory, lang);
+  const slugs = fs.readdirSync(langDir);
 
   const posts = slugs.map(
-    (slug) => getPostBySlug(slug).metadata as PostMetadata,
+    (slug) =>
+      getPostBySlug(slug.replace(/\.md$/, ""), lang).metadata as PostMetadata,
   );
 
   return posts.sort(

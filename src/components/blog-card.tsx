@@ -4,7 +4,7 @@ import { LuCalendar, LuClock, LuFolder } from "react-icons/lu";
 
 function BlogCard({ post }: { post: PostMetadata }) {
   return (
-    <Link className="no-underline col-span-3" href={`/blogs/${post.slug}`}>
+    <Link className="no-underline col-span-3" href={`/blogs/en/${post.slug}`}>
       <article className="flex  py-4 px-5 overflow-hidden relative flex-col text-blue-900/80 dark:text-gray-100 no-underline dark:hover:bg-white/10 bg-gradient-to-tr from-blue-100 dark:from-white/5 to-blue-700/5 dark:to-white/5 rounded-md dark:border border-white/10 md:rounded-lg">
         <div>
           <div className="flex items-center mb-3 text-sm ">
