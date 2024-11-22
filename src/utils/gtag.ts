@@ -1,6 +1,4 @@
-import env from "./get-env";
-
-export const GA_TRACKING_ID = env("NEXT_PUBLIC_GA_ID") as string;
+export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export const pageview = (url: any) => {
   (window as any).gtag("config", GA_TRACKING_ID, {

@@ -112,15 +112,16 @@ export default function App({ Component, pageProps, router }: any) {
     <StrictMode>
       <Head>
         <title>{`${data.fullName} • ${data.title}`}</title>
-        <Script
-          strategy="afterInteractive"
-          src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
-        />
-        <Script
-          id="gtag-init"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
+      </Head>
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+      />
+      <Script
+        id="gtag-init"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
@@ -128,10 +129,8 @@ export default function App({ Component, pageProps, router }: any) {
               page_path: window.location.pathname,
             });
           `,
-          }}
-        />
-      </Head>
-
+        }}
+      />
       <Toaster toastOptions={{ position: "top-left" }} />
 
       <AnimatePresence>
