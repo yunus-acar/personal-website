@@ -2,6 +2,11 @@
 
 const nextConfig = {
   reactStrictMode: true,
+  i18n: {
+    locales: ['en', 'tr'],
+    defaultLocale: 'tr',
+    localeDetection: true,
+  },
   images: {
     remotePatterns: [
       {
